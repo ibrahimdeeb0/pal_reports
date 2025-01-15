@@ -1,6 +1,9 @@
 import 'dart:developer';
 
+import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
+
+AppLogger get appConsoleLog => GetIt.I<AppLogger>();
 
 class AppLogger {
   late final Logger _logger;

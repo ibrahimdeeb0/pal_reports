@@ -9,6 +9,7 @@ import 'app_text_styles.dart';
 class ThemeManager {
   // Light Theme
   static ThemeData get lightTheme => ThemeData(
+        useMaterial3: true,
         fontFamily: AppFonts.inter,
         brightness: Brightness.light,
         colorScheme: ColorScheme.fromSeed(
@@ -16,13 +17,13 @@ class ThemeManager {
           brightness: Brightness.light,
         ),
         primaryColor: AppColors.mainBlue,
-        scaffoldBackgroundColor: AppColors.extraLightGray,
+        scaffoldBackgroundColor: AppColors.lightBlue,
         appBarTheme: _dynamicAppBarTheme(Colors.white),
         textTheme: _textTheme(AppColors.darkBlue),
         buttonTheme: _buttonTheme(),
         elevatedButtonTheme: _elevatedButtonTheme(),
         outlinedButtonTheme: _outlinedButtonTheme(),
-        inputDecorationTheme: _inputDecorationTheme(AppColors.lightGray),
+        inputDecorationTheme: _inputDecorationTheme(),
         snackBarTheme: _snackBarTheme(AppColors.mainBlue),
         dialogTheme: _dialogTheme(AppColors.lightBlue),
         tabBarTheme: _tabBarTheme(AppColors.mainBlue, AppColors.gray),
@@ -32,6 +33,7 @@ class ThemeManager {
 
   // Dark Theme
   static ThemeData get darkTheme => ThemeData(
+        useMaterial3: true,
         fontFamily: AppFonts.inter,
         brightness: Brightness.dark,
         colorScheme: ColorScheme.fromSeed(
@@ -43,7 +45,7 @@ class ThemeManager {
         appBarTheme: _dynamicAppBarTheme(AppColors.darkBlue),
         textTheme: _textTheme(AppColors.lightGray),
         buttonTheme: _buttonTheme(),
-        inputDecorationTheme: _inputDecorationTheme(AppColors.darkBlue),
+        inputDecorationTheme: _inputDecorationTheme(),
         snackBarTheme: _snackBarTheme(AppColors.darkBlue),
         dialogTheme: _dialogTheme(AppColors.lighterBlack),
         tabBarTheme: _tabBarTheme(AppColors.darkBlue, AppColors.lightGray),
@@ -97,9 +99,13 @@ class ThemeManager {
       const ElevatedButtonThemeData(
         style: ButtonStyle(
           backgroundColor: WidgetStatePropertyAll(AppColors.mainBlue),
-          textStyle: WidgetStatePropertyAll(
-            TextStyle(color: Colors.white),
-          ),
+          // shape: WidgetStatePropertyAll(
+          //   RoundedRectangleBorder(
+          //     borderRadius: BorderRadius.all(
+          //       Radius.circular(kDefaultBorderRadius),
+          //     ),
+          //   ),
+          // ),
         ),
       );
 
@@ -116,21 +122,18 @@ class ThemeManager {
       );
 
   // Input Decoration Theme
-  static InputDecorationTheme _inputDecorationTheme(Color fillColor) =>
-      InputDecorationTheme(
-        filled: true,
-        fillColor: fillColor,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(kDialogBorderRadius),
-          borderSide: const BorderSide(color: AppColors.lightGray, width: 1.3),
+  static InputDecorationTheme _inputDecorationTheme() => InputDecorationTheme(
+        border: const UnderlineInputBorder(
+          borderRadius: BorderRadius.zero,
+          borderSide: BorderSide(color: AppColors.borderGray, width: 1.3),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(kDialogBorderRadius),
-          borderSide: const BorderSide(color: AppColors.lightGray, width: 1.3),
+        enabledBorder: const UnderlineInputBorder(
+          borderRadius: BorderRadius.zero,
+          borderSide: BorderSide(color: AppColors.borderGray, width: 1.3),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(kDialogBorderRadius),
-          borderSide: const BorderSide(color: AppColors.mainBlue, width: 1.3),
+        focusedBorder: const UnderlineInputBorder(
+          borderRadius: BorderRadius.zero,
+          borderSide: BorderSide(color: AppColors.mainBlue, width: 1.5),
         ),
         hintStyle: AppTextStyles.body14GrayRegular,
       );

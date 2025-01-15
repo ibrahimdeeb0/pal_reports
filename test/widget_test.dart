@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pal_report/core/constants/shared_pref_keys.dart';
 import 'package:pal_report/core/helpers/extensions.dart';
 import 'package:pal_report/core/helpers/shared_pref_helper.dart';
-import 'package:pal_report/features/auth/auth_routes.dart';
+import 'package:pal_report/features/auth/routes/auth_routes.dart';
 import 'package:pal_report/features/home/home_routes.dart';
 import 'package:pal_report/my_app.dart';
 

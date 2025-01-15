@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ui/screens/auth_screen.dart';
+import '../ui/screens/auth_screen.dart';
 
 class AuthRoutes {
   static const String auth = '/auth';

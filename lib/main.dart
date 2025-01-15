@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pal_report/core/helpers/extensions.dart';
-import 'package:pal_report/features/auth/auth_routes.dart';
+import 'package:pal_report/features/auth/routes/auth_routes.dart';
 
 import 'core/di/dependency_injection.dart';
 import 'core/helpers/shared_pref_helper.dart';

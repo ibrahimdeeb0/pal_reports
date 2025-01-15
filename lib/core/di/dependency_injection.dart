@@ -1,11 +1,11 @@
-import 'package:dio/dio.dart';
+// import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 
 import '../helpers/app_logger.dart';
 import '../navigation/app_navigator_observer.dart';
 import '../navigation/app_router.dart';
-import '../networking/dio_factory.dart';
+// import '../networking/dio_factory.dart';
 
 final getIt = GetIt.instance;
 
@@ -25,7 +25,7 @@ Future<void> setupGetIt() async {
   );
 
   // Dio & ApiService
-  Dio dio = DioFactory.getDio();
+  // Dio dio = DioFactory.getDio();
 
   // login
   // getIt.registerLazySingleton<LoginApiService>(() => LoginApiService(dio));
