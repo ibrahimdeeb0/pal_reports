@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pal_report/core/helpers/app_logger.dart';
 import 'package:pal_report/core/theme/assets_manager.dart';
-import 'package:pal_report/core/widgets/app_Icon_button_outlined.dart';
+import 'package:pal_report/core/widgets/app_icon_button_outlined.dart';
 
 class SocialMediaButtons extends StatelessWidget {
   const SocialMediaButtons({

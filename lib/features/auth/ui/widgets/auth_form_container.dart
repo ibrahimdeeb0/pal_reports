@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:pal_report/core/helpers/spacing_extension.dart';
 import 'package:pal_report/core/theme/app_colors.dart';
 import 'package:pal_report/core/theme/app_text_styles.dart';
 
+import '../../logic/cubit/login_cubit.dart';
 import 'login_form.dart';
 import 'register_form.dart';
 
@@ -16,7 +18,6 @@ class AuthFormContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.screenFlexHeight() * 0.75,
       width: context.screenFlexWidth(),
       margin: EdgeInsets.symmetric(horizontal: 22.w),
       clipBehavior: Clip.hardEdge,
@@ -29,8 +30,29 @@ class AuthFormContainer extends StatelessWidget {
   }
 }
 
-class AuthForm extends StatelessWidget {
+class AuthForm extends StatefulWidget {
   const AuthForm({super.key});
+
+  @override
+  State<AuthForm> createState() => _AuthFormState();
+}
+
+class _AuthFormState extends State<AuthForm>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    context.read<LoginCubit>().authTabController = _tabController;
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose(); // Dispose TabController when widget is destroyed
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +63,7 @@ class AuthForm extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Column(
             children: [
-              40.spacingVertical,
+              50.spacingVertical,
               // * TabBar
               Container(
                 decoration: BoxDecoration(
@@ -52,6 +74,7 @@ class AuthForm extends StatelessWidget {
                   borderRadius: BorderRadius.circular(25.r),
                 ),
                 child: TabBar(
+                  controller: _tabController,
                   labelColor: Colors.white,
                   labelStyle: AppTextStyles.tabBarTextStyle,
                   unselectedLabelColor: AppColors.mainBlue,
@@ -67,14 +90,21 @@ class AuthForm extends StatelessWidget {
                     Tab(text: 'Log In'),
                     Tab(text: 'Sign Up'),
                   ],
+                  onTap: (value) {
+                    // * Clear the form
+                    // Clear inputs and update tab index
+                    context.read<LoginCubit>().changeTabIndex(value);
+                    context.read<LoginCubit>().clearInputsForm();
+                  },
                 ),
               ),
               30.spacingVertical,
               // * TabBarView
-              const Expanded(
+                Expanded(
                 child: TabBarView(
-                  physics: NeverScrollableScrollPhysics(),
-                  children: [
+                  controller: _tabController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: const [
                     LogInForm(),
                     SignUpForm(),
                   ],

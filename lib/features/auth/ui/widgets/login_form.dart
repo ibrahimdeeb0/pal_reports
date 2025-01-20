@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:pal_report/core/helpers/app_logger.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pal_report/core/helpers/spacing_extension.dart';
-import 'package:pal_report/core/theme/app_colors.dart';
 import 'package:pal_report/core/theme/app_text_styles.dart';
+
 import 'package:pal_report/core/widgets/gradient_button.dart';
 
+import '../../logic/cubit/login_cubit.dart';
+import 'inputs_form_validation.dart';
+import 'login_bloc_listener.dart';
 import 'social_media_buttons.dart';
 
 class LogInForm extends StatelessWidget {
@@ -17,34 +18,14 @@ class LogInForm extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          20.verticalSpace,
-          TextFormField(
-            cursorColor: AppColors.mainBlue,
-            decoration: const InputDecoration(
-              hintText: 'Enter email or username',
-            ),
-          ),
-          20.spacingVertical,
-          TextFormField(
-            cursorColor: AppColors.mainBlue,
-            decoration: const InputDecoration(
-              hintText: 'Password',
-            ),
-          ),
-          20.spacingVertical,
-          TextFormField(
-            cursorColor: AppColors.mainBlue,
-            decoration: const InputDecoration(
-              hintText: 'Confirm password',
-            ),
-          ),
+          const InputsFormValidation(),
           50.spacingVertical,
           GradientButton(
             onPressed: () {
               // * Login IN
-              appConsoleLog.info('Login IN');
+              validateThenDoLogin(context);
             },
-            text: 'Login In',
+            text: 'Login',
           ),
           30.spacingVertical,
           Text(
@@ -52,10 +33,16 @@ class LogInForm extends StatelessWidget {
             style: AppTextStyles.body14GrayRegular,
           ),
           30.spacingVertical,
-          // * SocialMedia Buttons
           const SocialMediaButtons(),
+          const LoginBlocListener(),
         ],
       ),
     );
+  }
+
+  void validateThenDoLogin(BuildContext context) {
+    if (context.read<LoginCubit>().loginFormKey.currentState!.validate()) {
+      context.read<LoginCubit>().login();
+    }
   }
 }

@@ -41,4 +41,14 @@ class AppColors {
   //? Button Colors
   static const Color buttonPrimary = mainBlue; // Primary button color
   static const Color buttonSecondary = blue; // Secondary button color
+
+  //? 
+   // Success
+  static const Color successGreen = Color(0xFF4CAF50); // A vibrant green color
+  // Error
+  static const Color errorRed = Color(0xFFF44336); // A bright red color
+  // Warning
+  static const Color warningYellow = Color(0xFFFFC107); // A warm yellow color
+  // Info
+  static const Color infoBlue = Color(0xFF2196F3); // A calming blue color
 }

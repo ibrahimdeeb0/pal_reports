@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pal_report/core/di/dependency_injection.dart';
 
+import '../logic/cubit/login_cubit.dart';
 import '../ui/screens/auth_screen.dart';
 
 class AuthRoutes {
@@ -9,7 +12,10 @@ class AuthRoutes {
     switch (settings.name) {
       case auth:
         return MaterialPageRoute(
-          builder: (_) => const AuthScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LoginCubit>(),
+            child: const AuthScreen(),
+          ),
         );
 
       default:

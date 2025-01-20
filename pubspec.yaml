@@ -13,9 +13,11 @@ dependencies:
   dio: ^5.7.0
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.0.0
   flutter_screenutil: ^5.9.3
   flutter_secure_storage: ^9.2.4
   flutter_svg: ^2.0.17
+  fluttertoast: ^8.2.10
   freezed: ^2.5.7
   freezed_annotation: ^2.4.4
   get_it: ^8.0.3
@@ -33,7 +35,6 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
-
   # fonts:
   #   - family: Trajan Pro
   #     fonts:

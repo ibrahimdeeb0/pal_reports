@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:pal_report/core/helpers/app_logger.dart';
 import 'package:pal_report/core/helpers/spacing_extension.dart';
-import 'package:pal_report/core/theme/app_colors.dart';
 import 'package:pal_report/core/theme/app_text_styles.dart';
 import 'package:pal_report/core/widgets/gradient_button.dart';
 
+import '../../logic/cubit/login_cubit.dart';
+import 'inputs_form_validation.dart';
+import 'register_bloc_listener.dart';
 import 'social_media_buttons.dart';
 
 class SignUpForm extends StatelessWidget {
@@ -17,39 +19,12 @@ class SignUpForm extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          20.verticalSpace,
-          TextFormField(
-            cursorColor: AppColors.mainBlue,
-            decoration: const InputDecoration(
-              hintText: 'Username',
-            ),
-          ),
-          20.verticalSpace,
-          TextFormField(
-            cursorColor: AppColors.mainBlue,
-            decoration: const InputDecoration(
-              hintText: 'Enter email or username',
-            ),
-          ),
-          20.spacingVertical,
-          TextFormField(
-            cursorColor: AppColors.mainBlue,
-            decoration: const InputDecoration(
-              hintText: 'Password',
-            ),
-          ),
-          20.spacingVertical,
-          TextFormField(
-            cursorColor: AppColors.mainBlue,
-            decoration: const InputDecoration(
-              hintText: 'Confirm password',
-            ),
-          ),
-          50.spacingVertical,
+          const InputsFormValidation(),
+          50.verticalSpace,
           GradientButton(
             onPressed: () {
               // * Register
-              appConsoleLog.info('Register');
+              validateThenDoRegister(context);
             },
             text: 'Register',
           ),
@@ -61,8 +36,15 @@ class SignUpForm extends StatelessWidget {
           30.spacingVertical,
           // * SocialMedia Buttons
           const SocialMediaButtons(),
+          const RegisterBlocListener(),
         ],
       ),
     );
+  }
+
+  void validateThenDoRegister(BuildContext context) {
+    if (context.read<LoginCubit>().registerFormKey.currentState!.validate()) {
+      context.read<LoginCubit>().register();
+    }
   }
 }
